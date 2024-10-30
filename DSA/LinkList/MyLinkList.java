@@ -13,11 +13,13 @@ public class MyLinkList<T> {
 
     private Node head;
     private Node tail;
+    private int size = 0;
 
     public void createNode(T data){
         if(head == null){
             Node node = new Node(data);
             head = tail = node;
+            size++;
         } else {
             System.out.println("Node is already created");
         }
@@ -32,6 +34,7 @@ public class MyLinkList<T> {
         Node newNode = new Node(data);
         tail.next = newNode;
         tail = newNode;
+        size++;
     }
 
     public void addFirst(T data){
@@ -43,6 +46,20 @@ public class MyLinkList<T> {
         Node newNode = new Node(data);
         newNode.next = head;
         head = newNode;
+        size++;
+    }
+
+    public void addMiddle(int i , T data){
+        Node newNode = new Node(data);
+        Node currentNode = head;
+        int temp = 0;
+        while (temp != i-1){
+            currentNode = currentNode.next;
+            temp++;
+        }
+
+        newNode.next = currentNode.next;
+        currentNode.next = newNode;
     }
 
     public void deleteFirst(){
@@ -52,6 +69,7 @@ public class MyLinkList<T> {
         }
 
         head = head.next;
+        size--;
     }
 
     public void deleteLast(){
@@ -70,6 +88,7 @@ public class MyLinkList<T> {
 
             temp.next = null;
             tail = temp;
+            size--;
         }
     }
 
@@ -79,11 +98,14 @@ public class MyLinkList<T> {
             return;
         }
         Node temp = head;
+        System.out.println("\n=====================");
         while(temp != null){
             System.out.print(temp.data+"->");
             temp = temp.next;
         }
         System.out.println("Null");
+        System.out.println("The size of the linked list is "+size);
+        System.out.println("=====================");
     }
 
 }
