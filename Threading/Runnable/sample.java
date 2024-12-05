@@ -1,10 +1,9 @@
-package Threading.Thread_Priotrity;
+package Threading.Runnable;
 
-import java.beans.IntrospectionException;
-
-class A extends Thread{
+class A implements Runnable
+{
     public void run(){
-        for(int i=0 ; i<100 ; i++){
+        for (int i=0 ; i<10 ; i++){
             System.out.println("Hi");
             try{
                 Thread.sleep(10);
@@ -15,9 +14,10 @@ class A extends Thread{
     }
 }
 
-class B extends Thread {
+class B implements Runnable
+{
     public void run(){
-        for(int i=0 ; i<100 ; i++){
+        for (int i=0 ; i<10 ; i++){
             System.out.println("Hello");
             try{
                 Thread.sleep(10);
@@ -27,15 +27,16 @@ class B extends Thread {
         }
     }
 }
+
 public class sample {
     public static void main(String[] args) {
-        A a = new A();
-        B b = new B();
+        Runnable a = new A();
+        Runnable b = new B();
 
-//        b.setPriority(Thread.MAX_PRIORITY);
-//        a.setPriority(Thread.MIN_PRIORITY);
+        Thread t1 = new Thread(a);
+        Thread t2 = new Thread(b);
 
-        a.start();
-        b.start();
+        t1.start();
+        t2.start();
     }
 }
